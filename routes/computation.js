@@ -1,16 +1,31 @@
+
 var express = require('express');
-const { param } = require('./users');
 var router = express.Router();
-var m = Math.random().toFixed(2);
 
+/* GET computation page. */
+router.get('/', function (req, res, next) {
+  var m;
+  
+  var random = Math.random();
+  console.log(req.query.m);
+  x = req.query.m;
 
-console.log(m);
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  if (req.query.m != undefined) {
-    m = req.query.m;
+  // checking if url has params
+  if (m == undefined) {
+    m = random;
   }
-   
-  res.render('computation', { Calculate: 'Cos of ' +m+' is '+Math.cos(m) });
+  
+  let cos = Math.cos(m,m) 
+  let asin =Math.asin(m)
+  let asinh = Math.asinh(m)
+ 
+  res.render('computation', {
+    title: 'Computation',
+    Calculate: `applied to ` + m  + ` is ` + cos ,
+    c1: `applied to ` + m + ` is ` + asin,
+    c2: `applied to ` + m + ` is ` + asinh,
+    
+  });
 });
+
 module.exports = router;
